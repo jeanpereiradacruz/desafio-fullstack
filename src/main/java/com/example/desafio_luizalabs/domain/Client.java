@@ -27,4 +27,9 @@ public class Client {
         this.email = request.email();
         this.password = request.password();
     }
+
+    @PrePersist
+    public void prePersist() {
+        this.id = UUID.randomUUID();
+    }
 }
