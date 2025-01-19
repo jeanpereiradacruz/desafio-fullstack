@@ -17,10 +17,18 @@ public class Client {
 
     @Id
     private UUID id;
+
+    @Column(nullable = false, length = 100)
     private String name;
-    @Column(unique = true)
+
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
+
+    @Column(nullable = false, length = 100)
     private String password;
+
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private FavoriteList favoriteList;
 
     public Client(ClientRequestDTO request) {
         this.name = request.name();
