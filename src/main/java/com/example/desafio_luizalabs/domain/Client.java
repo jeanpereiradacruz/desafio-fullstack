@@ -1,6 +1,6 @@
 package com.example.desafio_luizalabs.domain;
 
-import com.example.desafio_luizalabs.dtos.ClientRequestDTO;
+import com.example.desafio_luizalabs.dtos.ClientRequestRegisterDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,7 +30,7 @@ public class Client {
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private FavoriteList favoriteList;
 
-    public Client(ClientRequestDTO request) {
+    public Client(ClientRequestRegisterDTO request) {
         this.name = request.name();
         this.email = request.email();
         this.password = request.password();

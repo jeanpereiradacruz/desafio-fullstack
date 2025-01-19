@@ -8,4 +8,5 @@ import java.util.UUID;
 public interface ClientRepository extends JpaRepository<Client, UUID> {
 
     Client findByEmail(String email);
+    boolean existsByEmail(String email);
 }

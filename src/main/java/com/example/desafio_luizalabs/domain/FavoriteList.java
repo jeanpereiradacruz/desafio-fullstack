@@ -24,4 +24,9 @@ public class FavoriteList {
 
     @OneToMany(mappedBy = "favoriteList", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FavoriteProduct> products = new ArrayList<>();
+
+    @PrePersist
+    public void prePersist() {
+        this.id = UUID.randomUUID();
+    }
 }
