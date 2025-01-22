@@ -1,5 +1,6 @@
 package com.example.desafio_luizalabs.services;
 
+import com.example.desafio_luizalabs.auth.JwtUtil;
 import com.example.desafio_luizalabs.domain.Client;
 import com.example.desafio_luizalabs.dtos.ClientRequestLoginDTO;
 import com.example.desafio_luizalabs.dtos.ClientRequestRegisterDTO;
@@ -18,11 +19,18 @@ import java.util.UUID;
 @Service
 public class ClientService {
 
-    @Autowired
     private ClientRepository clientRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    private final JwtUtil jwtUtil;
+
+    public ClientService(JwtUtil jwtUtil, BCryptPasswordEncoder bcryptPasswordEncoder, ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+        this.jwtUtil = jwtUtil;
+    }
+
 
     public ClientResponseDTO save(ClientRequestRegisterDTO dto) {
         if (clientRepository.existsByEmail(dto.email())) {
@@ -38,9 +46,16 @@ public class ClientService {
         return new ClientResponseDTO(client, token);
     }
 
+    public Client save(Client client) {
+        return clientRepository.save(client);
+    }
+
     public String generateToken(Client client) {
-        // TODO implementar token JWT
-        return UUID.randomUUID().toString().replace("-", "");
+        return jwtUtil.generateToken(client.getEmail());
+    }
+
+    public Client findById(UUID id) {
+        return clientRepository.findById(id).orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado."));
     }
 
     public List<ClientResponseDTO> findAll() {
