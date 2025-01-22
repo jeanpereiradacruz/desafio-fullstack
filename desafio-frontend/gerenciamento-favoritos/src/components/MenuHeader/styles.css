@@ -1,0 +1,30 @@
+.catalog-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  
+  .catalog-links {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .catalog-link {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    text-decoration: none;
+  }
+  
+  .catalog-link:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .catalog-links {
+      margin-left: -50px;
+    }
+
+    .catalog-link {
+      font-size: 15px;
+    }
+  }
