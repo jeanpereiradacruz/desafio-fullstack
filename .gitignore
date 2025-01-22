@@ -19,7 +19,7 @@ target/
 *.iml
 *.ipr
 
-.env
+desafio-backend/.env
 
 ### NetBeans ###
 /nbproject/private/
