@@ -3,6 +3,8 @@ package com.example.desafio_luizalabs.config;
 import com.example.desafio_luizalabs.dtos.ExceptionDTO;
 import com.example.desafio_luizalabs.exception.ClientNotFoundException;
 import com.example.desafio_luizalabs.exception.InvalidCredentialsException;
+import com.example.desafio_luizalabs.exception.ProductNotExistsException;
+import com.example.desafio_luizalabs.exception.TotalProductListExceeded;
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -64,4 +66,17 @@ public class ControllerExceptionHandler {
         ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage(), "400");
         return ResponseEntity.badRequest().body(exceptionDTO);
     }
+
+    @ExceptionHandler(TotalProductListExceeded.class)
+    public ResponseEntity<ExceptionDTO> handleTotalProductListExceededException(TotalProductListExceeded exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage(), "403");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(exceptionDTO);
+    }
+
+    @ExceptionHandler(ProductNotExistsException.class)
+    public ResponseEntity<ExceptionDTO> handleTotalProductListExceededException(ProductNotExistsException exception) {
+        ExceptionDTO exceptionDTO = new ExceptionDTO(exception.getMessage(), "400");
+        return ResponseEntity.badRequest().body(exceptionDTO);
+    }
+
 }
