@@ -94,7 +94,8 @@ Comando: ```docker compose up --build```
 
 ### Pronto!
 
-Neste momento você deve estar conseguindo executar a aplicação.
+Neste momento você deve estar conseguindo executar a aplicação frontend no endeco =>  http://localhost:5173/
+E a aplicação backend estara rodando na porta 8080.
 
 
 
