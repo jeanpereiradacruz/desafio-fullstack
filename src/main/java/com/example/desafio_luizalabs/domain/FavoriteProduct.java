@@ -1,10 +1,18 @@
 package com.example.desafio_luizalabs.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 
-@Entity
+@Entity(name = "favoriteProduct")
+@Table(name = "favorite_products")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = {"id"})
 public class FavoriteProduct {
 
     @Id
@@ -20,6 +28,7 @@ public class FavoriteProduct {
     private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "favoriteListId", nullable = false)
+    @JoinColumn(name = "favorite_list_id", nullable = false)
+    @JsonBackReference
     private FavoriteList favoriteList;
 }

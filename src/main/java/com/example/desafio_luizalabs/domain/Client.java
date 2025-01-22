@@ -1,6 +1,7 @@
 package com.example.desafio_luizalabs.domain;
 
 import com.example.desafio_luizalabs.dtos.ClientRequestRegisterDTO;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,7 @@ public class Client {
     private String password;
 
     @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private FavoriteList favoriteList;
 
     public Client(ClientRequestRegisterDTO request) {
@@ -39,5 +41,12 @@ public class Client {
     @PrePersist
     public void prePersist() {
         this.id = UUID.randomUUID();
+    }
+
+    public void setFavoriteList(FavoriteList favoriteList) {
+        this.favoriteList = favoriteList;
+        if (favoriteList != null) {
+            favoriteList.setClient(this);
+        }
     }
 }
